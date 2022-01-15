@@ -32,7 +32,7 @@ public abstract class MovingObject {
 
 	
 	public void printPosition() {
-		System.out.println("[" + xIndex + ", " + yIndex+ "]");
+		System.out.println("[" + yIndex + ", " + xIndex + "]");
 	}
 
 	
