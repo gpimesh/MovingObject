@@ -49,7 +49,7 @@ public class ObjectController {
 	            			
 	        				grid = new MovingObject[i][j]; // create the 4*4 table 
 	        				movingObj = new MovingCube("N", Byte.parseByte(lineVector[2]),Byte.parseByte(lineVector[3]));
-	        				grid[k][l] = movingObj; // assign the Moving object's location into the grid
+	        				grid[l][k] = movingObj; // assign the Moving object's location into the grid
 	        				break;
 	        				
 	            		}else {
@@ -82,7 +82,9 @@ public class ObjectController {
 	private static byte[] toByte(final String[] strs) {
         byte[] bytes=new byte[strs.length];
         for (int i=0; i<strs.length; i++) {
-            bytes[i]=Byte.parseByte(strs[i]);
+        	if(!strs[i].isEmpty()) {
+        		bytes[i]=Byte.parseByte(strs[i]);
+        	}
         }
         return bytes;
     }
@@ -99,7 +101,8 @@ public class ObjectController {
 		
 		for (byte i = 0; i < path.length; i++) {
 			if(path[i]==0) {
-				mObj.printPosition();				
+				//swapAndPrintObjectLocation(grid);
+				mObj.printPosition();
 			} else if(path[i]==1){
 				moveForward(mObj);
 			}else if (path[i]==2) {
@@ -112,7 +115,7 @@ public class ObjectController {
 				System.out.println("No command found for given value. Please enter value between 0-4");
 			}
 		}
-		//44printMap();	
+		//printMap();	
 		
 	}
 	
@@ -131,7 +134,7 @@ public class ObjectController {
 				grid[currentX][currentY] = null;
 				obj.setxIndex((byte) (currentX-1));
 				grid[currentX - 1][currentY] = obj;
-				//obj.printPosition();
+				
 			}
 		}else if(direction.equalsIgnoreCase("s")) {
 			
@@ -142,9 +145,8 @@ public class ObjectController {
 				
 				grid[currentX][currentY] = null;
 				obj.setxIndex((byte) (currentX + 1));
-				grid[currentX + 1][currentY] = obj;
+				grid[currentX + 1][currentY] = obj;				
 				
-				//obj.printPosition();
 			}
 		}else if(direction.equalsIgnoreCase("e")) {
 			
@@ -155,9 +157,8 @@ public class ObjectController {
 			
 				grid[currentX][currentY] = null;
 				obj.setyIndex((byte) (currentY + 1));
-				grid[currentX][currentY+1] = obj;
+				grid[currentX][currentY+1] = obj;				
 				
-				//obj.printPosition();
 			}
 		}else if(direction.equalsIgnoreCase("w")) {
 			
@@ -168,9 +169,8 @@ public class ObjectController {
 			
 				grid[currentX][currentY] = null;
 				obj.setyIndex((byte) (currentY -1));
-				grid[currentX][currentY-1] = obj;
-				
-				//obj.printPosition();
+				grid[currentX][currentY-1] = obj;				
+			
 			}
 		}
 	}
